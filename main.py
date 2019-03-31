@@ -1,6 +1,3 @@
-print("Hello, world!")
+from scripts import week2
 
-data = ["test1", "test2", "test3"]
-
-for i in data:
-    print(i)
+week2.run()
