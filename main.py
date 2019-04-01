@@ -1,3 +1,3 @@
-from scripts import week2
+from scripts import iris_analysis
 
-week2.run()
+iris_analysis.run()
