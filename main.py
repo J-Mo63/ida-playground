@@ -1,3 +1,3 @@
-from scripts import iris_analysis
+from scripts import abalone_analysis
 
-iris_analysis.run()
+abalone_analysis.run()
