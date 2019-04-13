@@ -1,3 +1,3 @@
 from scripts import tools_testing
 
-tools_testing.plotly()
+tools_testing.pytorch()
