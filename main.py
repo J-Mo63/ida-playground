@@ -1,3 +1,3 @@
-from scripts import tools_testing
+from scripts import iris_analysis
 
-tools_testing.pytorch()
+iris_analysis.binning()

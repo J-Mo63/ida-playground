@@ -73,3 +73,52 @@ def run():
     # Display the plot
     plt.imshow(cm, cmap = 'binary')
     # Tune the classifier parameter
+
+
+def binning():
+    # Import libraries
+    import pandas as pd
+
+    # Import the data and read from Excel file
+    df = pd.read_excel('iris.xls')
+
+    # Isolate the attribute
+    data = df['Sepal.Length']
+
+    # Cut up the data by width & depth
+    bin_equi_width = pd.cut(data, 10)
+    bin_equi_depth = pd.qcut(data, 10)
+
+    # print the results
+    # print("Equi-Width:")
+    # print(bin_equi_width.value_counts())
+    # print()
+    # print("Equi-Depth:")
+    # print(bin_equi_depth.value_counts())
+
+    # Format and listify equi-width list
+    bin_equi_width_list = []
+    for i in range(bin_equi_width.size):
+        left_item = "{0:.2f}".format(bin_equi_width[i].left)
+        right_item = "{0:.2f}".format(bin_equi_width[i].right)
+        bin_equi_width_list.append([left_item, right_item])
+
+    # Format and listify equi-depth list
+    bin_equi_depth_list = []
+    for i in range(bin_equi_depth.size):
+        left_item = "{0:.2f}".format(bin_equi_depth[i].left)
+        right_item = "{0:.2f}".format(bin_equi_depth[i].right)
+        bin_equi_depth_list.append([left_item, right_item])
+
+    # Create and save the data to the excel output document
+    df = pd.DataFrame({
+        'Sepal.Length': df['Sepal.Length'],
+        'Sepal.Width': df['Sepal.Width'],
+        'Petal.Length': df['Petal.Length'],
+        'Petal.Width': df['Petal.Width'],
+        'Species': df['Species'],
+        'Equi-Width': bin_equi_width_list,
+        'Equi-Depth': bin_equi_depth_list})
+    writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter')
+    df.to_excel(writer, index=False, sheet_name='Sheet1')
+    writer.save()
