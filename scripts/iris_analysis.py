@@ -133,6 +133,22 @@ def pre_processing():
         binarised_setosa_list.append(binarised[i][0])
         binarised_versicolor_list.append(binarised[i][1])
         binarised_virginica_list.append(binarised[i][2])
+
+    # Discretise the petal width into categories
+    petal_width_df = df['Petal.Width'].values
+    discretised = []
+    for i in range(petal_width_df.size):
+        item = petal_width_df[i]
+        if item < 0.2:
+            discretised.append('Short')
+        elif item <= 0.3:
+            discretised.append('Average')
+        elif item >= 0.4:
+            discretised.append('Long')
+        else:
+            discretised.append('Extra Short')
+
+    # Create the combined data frame for output
     df = pd.DataFrame({
         'Sepal.Length': df['Sepal.Length'],
         'Sepal.Width': df['Sepal.Width'],
