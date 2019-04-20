@@ -78,6 +78,7 @@ def run():
 def pre_processing():
     # Import libraries
     import pandas as pd
+    from sklearn import preprocessing
 
     # Import the data and read from Excel file
     df = pd.read_excel('iris.xls')
