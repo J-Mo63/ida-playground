@@ -75,7 +75,7 @@ def run():
     # Tune the classifier parameter
 
 
-def binning():
+def pre_processing():
     # Import libraries
     import pandas as pd
 
