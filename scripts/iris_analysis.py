@@ -111,7 +111,11 @@ def pre_processing():
         right_item = "{0:.2f}".format(bin_equi_depth[i].right)
         bin_equi_depth_list.append([left_item, right_item])
 
-    # Create and save the data to the excel output document
+    # Fit the min-max normalised list
+    petal_length_df = df['Petal.Length'].values.reshape(-1, 1)
+    min_max_scaled = preprocessing.MinMaxScaler().fit_transform(petal_length_df)
+    normalise_min_max_list = pd.DataFrame(min_max_scaled).values.flatten()
+
     df = pd.DataFrame({
         'Sepal.Length': df['Sepal.Length'],
         'Sepal.Width': df['Sepal.Width'],
