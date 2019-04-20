@@ -156,8 +156,16 @@ def pre_processing():
         'Petal.Width': df['Petal.Width'],
         'Species': df['Species'],
         'Equi-Width': bin_equi_width_list,
-        'Equi-Depth': bin_equi_depth_list})
-    writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter')
+        'Equi-Depth': bin_equi_depth_list,
+        'Min-Max': normalise_min_max_list,
+        'Z-Score': normalise_z_score_list,
+        'Binarised-Setosa': binarised_setosa_list,
+        'Binarised-Versicolor': binarised_versicolor_list,
+        'Binarised-virginica': binarised_virginica_list,
+        'Discretised': discretised
+    })
+
+    # Write and save the data to an excel document
     writer = pd.ExcelWriter('output.xls', engine='xlsxwriter')
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     writer.save()
