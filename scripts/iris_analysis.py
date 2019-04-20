@@ -120,6 +120,19 @@ def pre_processing():
     petal_length_df = df['Petal.Length'].values.reshape(-1, 1)
     z_score_scaled = preprocessing.StandardScaler().fit_transform(petal_length_df)
     normalise_z_score_list = pd.DataFrame(z_score_scaled).values.flatten()
+
+    # Binarise the species
+    species_df = df['Species'].values
+    binarised = preprocessing.LabelBinarizer().fit_transform(species_df)
+
+    # Format the binarised species into three columns
+    binarised_setosa_list = []
+    binarised_versicolor_list = []
+    binarised_virginica_list = []
+    for i in range(len(binarised)):
+        binarised_setosa_list.append(binarised[i][0])
+        binarised_versicolor_list.append(binarised[i][1])
+        binarised_virginica_list.append(binarised[i][2])
     df = pd.DataFrame({
         'Sepal.Length': df['Sepal.Length'],
         'Sepal.Width': df['Sepal.Width'],
