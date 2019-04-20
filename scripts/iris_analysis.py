@@ -120,5 +120,6 @@ def binning():
         'Equi-Width': bin_equi_width_list,
         'Equi-Depth': bin_equi_depth_list})
     writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter')
+    writer = pd.ExcelWriter('output.xls', engine='xlsxwriter')
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     writer.save()
