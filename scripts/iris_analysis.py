@@ -116,6 +116,10 @@ def pre_processing():
     min_max_scaled = preprocessing.MinMaxScaler().fit_transform(petal_length_df)
     normalise_min_max_list = pd.DataFrame(min_max_scaled).values.flatten()
 
+    # Fit the z-score normalised list
+    petal_length_df = df['Petal.Length'].values.reshape(-1, 1)
+    z_score_scaled = preprocessing.StandardScaler().fit_transform(petal_length_df)
+    normalise_z_score_list = pd.DataFrame(z_score_scaled).values.flatten()
     df = pd.DataFrame({
         'Sepal.Length': df['Sepal.Length'],
         'Sepal.Width': df['Sepal.Width'],
