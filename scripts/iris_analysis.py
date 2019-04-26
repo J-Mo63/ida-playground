@@ -1,7 +1,11 @@
+# Import libraries
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
 def run():
-    import pandas as pd
+    # Import libraries
     import matplotlib.colors as colours
-    import matplotlib.pyplot as plt
 
     # Import the data, read data from Excel file
     df = pd.read_excel('iris.xls')
@@ -77,7 +81,6 @@ def run():
 
 def pre_processing():
     # Import libraries
-    import pandas as pd
     from sklearn import preprocessing
 
     # Import the data and read from Excel file
@@ -169,3 +172,29 @@ def pre_processing():
     writer = pd.ExcelWriter('output.xls', engine='xlsxwriter')
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     writer.save()
+
+
+def clustering():
+    # Import libraries
+    from sklearn.decomposition import PCA
+    from sklearn.cluster import KMeans
+
+    # Import the data and read from Excel file
+    df = pd.read_excel('iris.xls')
+
+    x_data = df[['Petal.Length']]
+    y_data = df[['Petal.Width']]
+
+    kmeans = KMeans(n_clusters=3)
+    kmeansoutput = kmeans.fit(y_data)
+
+    pca = PCA(n_components=1).fit(y_data)
+    pca_d = pca.transform(x_data)
+    pca_c = pca.transform(y_data)
+
+    plt.figure('3 Cluster K-Means')
+    plt.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
+    plt.xlabel('Sepal.Length')
+    plt.ylabel('Sepal.Width')
+    plt.title('K-Means Clustering for Iris')
+    plt.show()
