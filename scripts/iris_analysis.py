@@ -5,6 +5,7 @@ import pandas as pd
 
 def run():
     # Import libraries
+    import matplotlib.pyplot as plt
     import matplotlib.colors as colours
 
     # Import the data, read data from Excel file
@@ -77,6 +78,29 @@ def run():
     # Display the plot
     plt.imshow(cm, cmap = 'binary')
     # Tune the classifier parameter
+
+    from sklearn.tree import export_graphviz
+    # Export as dot file
+    export_graphviz(my_tree, out_file='tree.dot',
+                    feature_names=['Sepal Length', 'Sepal Width', 'Petal Length', 'Petal Width'],
+                    class_names=['Setosa', 'Versicolor', 'Virginica'],
+                    rounded=True, proportion=False,
+                    precision=2, filled=True)
+
+    # Convert to png
+    import pydot
+    (graph,) = pydot.graph_from_dot_file('tree.dot')
+    graph.write_png('tree.png')
+
+    # Display in python
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(14, 18))
+    plt.imshow(plt.imread('tree.png'))
+    plt.axis('off')
+    plt.show()
+
+
+
 
 
 def pre_processing():
